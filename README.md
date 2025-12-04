@@ -1,6 +1,7 @@
 <h2>React 기반 JavaScript To-Do List 프로젝트<h2>
-![React](https://raw.githubusercontent.com/github/explore/main/topics/react/react.png)  
-![JavaScript](https://raw.githubusercontent.com/github/explore/main/topics/javascript/javascript.png)
+![React](https://img.shields.io/badge/React-17.0.2-blue?logo=react&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript&logoColor=black)
+
   
 ![Progress](https://img.shields.io/badge/Progress-15%25-brightgreen)
   
