@@ -6,9 +6,6 @@
   
 ![Progress](https://img.shields.io/badge/Progress-15%25-brightgreen)
 
-  ![React](https://raw.githubusercontent.com/github/explore/main/topics/react/react.png)
-![JavaScript](https://raw.githubusercontent.com/github/explore/main/topics/javascript/javascript.png)
-
 ### 회원가입 페이지 구현
 - [x] 회원가입 페이지 UI 구현
 - [x] Modal, Serve Modal 기능 구현
