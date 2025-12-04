@@ -1,5 +1,9 @@
 <h2>React 기반 JavaScript To-Do List 프로젝트<h2>
-
+![React](https://raw.githubusercontent.com/github/explore/main/topics/react/react.png)  
+![JavaScript](https://raw.githubusercontent.com/github/explore/main/topics/javascript/javascript.png)
+  
+![Progress](https://img.shields.io/badge/Progress-15%25-brightgreen)
+  
 ### 회원가입 페이지 구현
 - [x] 회원가입 페이지 UI 구현
 - [x] Modal, Serve Modal 기능 구현
@@ -13,5 +17,3 @@
 - [ ] To-Do 리스트 CRUD 기능 구현
 - [ ] 상태 관리 (React State 또는 Context API)
 - [ ] 스타일링 개선 및 반응형 UI 적용
-
-![Progress](https://img.shields.io/badge/Progress-20%25-brightgreen)
