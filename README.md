@@ -2,7 +2,6 @@
   
 ![React](https://img.shields.io/badge/React-19.0.2-blue?logo=react&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript&logoColor=black)
-![API](https://img.shields.io/badge/API‑REST‑blue?logo=rest&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.0-6DB33F?logo=springboot&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)
 
@@ -25,4 +24,4 @@
 - [ ] To-Do 리스트 CRUD 기능 구현
 - [ ] 상태 관리 (React State 또는 Context API)
 - [ ] 스타일링 개선 및 반응형 UI 적용
-- [ ] SpringBoot와 MySQL에 유저정보 저장
+- [ ] SpringBoot와 MySQL에 유저정보 저장(REST-API)
