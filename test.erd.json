@@ -1,0 +1,115 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dineug/erd-editor/main/json-schema/schema.json",
+  "version": "3.0.0",
+  "settings": {
+    "width": 2000,
+    "height": 2000,
+    "scrollTop": -0.6964,
+    "scrollLeft": -0.4228,
+    "zoomLevel": 1,
+    "show": 431,
+    "database": 4,
+    "databaseName": "",
+    "canvasType": "@dineug/erd-editor/builtin-schema-sql",
+    "language": 1,
+    "tableNameCase": 4,
+    "columnNameCase": 2,
+    "bracketType": 1,
+    "relationshipDataTypeSync": true,
+    "relationshipOptimization": false,
+    "columnOrder": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "maxWidthComment": -1,
+    "ignoreSaveSettings": 0
+  },
+  "doc": {
+    "tableIds": [
+      "HpXKIrHFoloGVhyXnHGDU"
+    ],
+    "relationshipIds": [],
+    "indexIds": [],
+    "memoIds": []
+  },
+  "collections": {
+    "tableEntities": {
+      "HpXKIrHFoloGVhyXnHGDU": {
+        "id": "HpXKIrHFoloGVhyXnHGDU",
+        "name": "test",
+        "comment": "연동 테스트 테이블",
+        "columnIds": [
+          "SiQWcN9zQYi47AeACHrHi",
+          "fFDin_zmyexx-CmOkodjj"
+        ],
+        "seqColumnIds": [
+          "SiQWcN9zQYi47AeACHrHi",
+          "fFDin_zmyexx-CmOkodjj"
+        ],
+        "ui": {
+          "x": 45.1179,
+          "y": 47.488,
+          "zIndex": 2,
+          "widthName": 60,
+          "widthComment": 105,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1764729779462,
+          "createAt": 1764729731140
+        }
+      }
+    },
+    "tableColumnEntities": {
+      "SiQWcN9zQYi47AeACHrHi": {
+        "id": "SiQWcN9zQYi47AeACHrHi",
+        "tableId": "HpXKIrHFoloGVhyXnHGDU",
+        "name": "name",
+        "comment": "",
+        "dataType": "VARCHAR(50)",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1764729772395,
+          "createAt": 1764729741603
+        }
+      },
+      "fFDin_zmyexx-CmOkodjj": {
+        "id": "fFDin_zmyexx-CmOkodjj",
+        "tableId": "HpXKIrHFoloGVhyXnHGDU",
+        "name": "password",
+        "comment": "",
+        "dataType": "VARCHAR(50)",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1764729769077,
+          "createAt": 1764729755600
+        }
+      }
+    },
+    "relationshipEntities": {},
+    "indexEntities": {},
+    "indexColumnEntities": {},
+    "memoEntities": {}
+  }
+}
