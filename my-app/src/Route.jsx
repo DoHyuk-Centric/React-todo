@@ -5,8 +5,8 @@ import TestList from "./TestList.jsx";
 const Router = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Signup />} />
-      <Route path="/test" element={<TestList />} />
+      <Route path="/Signup" element={<Signup />} />
+      <Route path="/SignIn" element={<TestList />} />
     </Routes>
   </BrowserRouter>
 );
