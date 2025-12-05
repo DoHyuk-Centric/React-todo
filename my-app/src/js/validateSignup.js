@@ -30,8 +30,5 @@ export function validateSignup(e,userdata) {
   if(!agree) {
     return alert("이용약관에 동의해주세요.");
   }
-  
-
-    alert("회원가입이 완료되었습니다!");
   return true;
 }

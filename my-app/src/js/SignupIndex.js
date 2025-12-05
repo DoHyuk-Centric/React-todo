@@ -5,7 +5,6 @@ export const handleSignup = async (e, userSignupData) => {
 
   const valid = validateSignup(e, userSignupData);
   if (!valid) return;
-  console.log("실행됨");
 
   const res = await fetch("http://localhost:8080/auth/signup", {
     method: "POST",

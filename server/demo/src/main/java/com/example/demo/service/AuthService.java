@@ -17,9 +17,13 @@ public class AuthService {
     public void signup(SignupRequest request) {
 
         // 이미 이메일 존재하는지 체크
-        if (userRepository.existsByEmail(request.getEmail())) {
+        if(userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("이미 존재하는 이메일입니다.");
         }
+        
+        if(userRepository.existsByUserID(request.getUserID())){
+            throw new RuntimeException("이미 존재하는 아이디입니다.");
+        } 
 
         // 비번 암호화
         String encodedPassword = passwordEncoder.encode(request.getUserPW());
@@ -34,5 +38,11 @@ public class AuthService {
                 .build();
 
         userRepository.save(user);
+    }
+
+    public void signin(SignupRequest request){
+        if(!userRepository.existsByUserID(request.getUserID())) {
+            throw new RuntimeException("아이디를 확인해주세요.");
+        }
     }
 }

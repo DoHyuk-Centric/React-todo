@@ -14,8 +14,14 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public String signup(@RequestBody SignupRequest request) {
+    public String signup(@RequestBody SignupRequest request){
         authService.signup(request);
         return "회원가입 성공";
+    }
+
+    @PostMapping("/signin")
+    public String signin(@RequestBody SignupRequest request){
+        authService.signin(request);
+        return "로그인";
     }
 }
