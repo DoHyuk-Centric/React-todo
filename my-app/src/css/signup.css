@@ -132,7 +132,7 @@ button:disabled{
   justify-content: center;
 }
 
-.App{
+.signup-container{
   background-color: #FFF8EB;
   border-radius: 20px;
   margin: 40px auto;

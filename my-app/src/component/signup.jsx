@@ -99,7 +99,7 @@ function Signup() {
   return (
     <div className="App_container">
       <Header />
-      <div className="App">
+      <div className="signup-container">
         <div className="signup-header">
           <div className="Logo"></div>
           <h2>회원가입</h2>

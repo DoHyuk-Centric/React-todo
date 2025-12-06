@@ -41,8 +41,12 @@ public class AuthService {
     }
 
     public void signin(SignupRequest request){
-        if(!userRepository.existsByUserID(request.getUserID())) {
-            throw new RuntimeException("아이디를 확인해주세요.");
+        User user = userRepository.findByUserID(request.getUserID())
+        .orElseThrow(() -> new RuntimeException("아이디를 확인해주세요."));
+        //orElseThrow 참고 : https://velog.io/@wonizizi99/Optional%EC%9D%98-orElseorElseThrow-%EC%82%AC%EC%9A%A9%EB%B2%95
+
+        if(!passwordEncoder.matches(request.getUserPW(), user.getPassword())) {
+            throw new RuntimeException("비밀번호가 올바르지 않습니다.");
         }
     }
 }
