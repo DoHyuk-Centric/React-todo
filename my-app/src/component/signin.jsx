@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { handleSignin } from "./js/SignInIndex";
-import "./css/signin.css";
-import "./css/App.css";
+import { handleSignin } from "../js/SignInIndex";
+import "../css/signin.css";
+import "../css/App.css";
 
 function Signin() {
   const [userInputID, setuserID] = useState("");
