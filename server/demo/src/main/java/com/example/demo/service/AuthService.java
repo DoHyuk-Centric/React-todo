@@ -1,8 +1,12 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.SigninRequest;
 import com.example.demo.dto.SignupRequest;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.security.jwt.JwtProvider;
+import com.example.demo.security.jwt.TokenResponse;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
 
     public void signup(SignupRequest request) {
 
@@ -40,7 +45,7 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public void signin(SignupRequest request){
+    public TokenResponse signin(SigninRequest request){
         User user = userRepository.findByUserID(request.getUserID())
         .orElseThrow(() -> new RuntimeException("아이디를 확인해주세요."));
         //orElseThrow 참고 : https://velog.io/@wonizizi99/Optional%EC%9D%98-orElseorElseThrow-%EC%82%AC%EC%9A%A9%EB%B2%95
@@ -48,5 +53,26 @@ public class AuthService {
         if(!passwordEncoder.matches(request.getUserPW(), user.getPassword())) {
             throw new RuntimeException("비밀번호가 올바르지 않습니다.");
         }
+
+        String accessToken = jwtProvider.generateAccessToken(user.getUserID());
+
+        String refreshToken = null;
+        if(request.isAutoLogin()){
+            refreshToken = jwtProvider.generateRefreshToken(user.getUserID());
+            //System.out.println("RefreshToken : " + refreshToken);
+        }
+
+
+        //System.out.println("AccessToken : " + accessToken);
+
+
+        return new TokenResponse(accessToken, refreshToken);
+    }
+
+    public TokenResponse refreshToken(String refreshToken){
+        String userID = jwtProvider.getUserIDFromToken(refreshToken);
+
+        String newAccessToken = jwtProvider.generateAccessToken(userID);
+        return new TokenResponse(newAccessToken, refreshToken);
     }
 }

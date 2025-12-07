@@ -6,10 +6,12 @@ import "../css/App.css";
 function Signin() {
   const [userInputID, setuserID] = useState("");
   const [userInputPW, setuserPW] = useState("");
+  const [autoLogin, setautoLogin] = useState(false);
 
   const userSignindata = {
     userInputID,
     userInputPW,
+    autoLogin,
   };
 
   return (
@@ -32,15 +34,15 @@ function Signin() {
           <input
             onChange={(e) => setuserPW(e.target.value)}
             id="userInputPW"
-            type="text"
+            type="password"
             placeholder="비밀번호를 입력해주세요."
             className="signin-input"
           ></input>
         </div>
 
         <div className="signin-idremember">
-          <input className="checkbox-style" type="checkbox" />
-          <p>아이디 기억하기</p>
+          <input onChange={(e) => setautoLogin(e.target.checked)} id="autoLogin" className="checkbox-style" type="checkbox" />
+          <p>자동 로그인</p>
         </div>
       </div>
 

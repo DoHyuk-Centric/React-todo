@@ -7,6 +7,7 @@ export const handleSignin = async (e, userSignindata) => {
         body: JSON.stringify({
             userID: userSignindata.userInputID,
             userPW: userSignindata.userInputPW,
+            autoLogin : userSignindata.autoLogin,
         }),
     });
 
