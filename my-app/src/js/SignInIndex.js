@@ -4,6 +4,7 @@ export const handleSignin = async (e, userSignindata) => {
     const res = await fetch("http://localhost:8080/auth/signin",{
         method: "POST",
         headers: { "Content-Type": "application/json"},
+        credentials : "include", // Refresh Token 쿠키용
         body: JSON.stringify({
             userID: userSignindata.userInputID,
             userPW: userSignindata.userInputPW,
@@ -11,6 +12,12 @@ export const handleSignin = async (e, userSignindata) => {
         }),
     });
 
-    const text = await res.text();
-    alert(text);
+    if(!res.ok){
+        return alert("로그인 실패");
+    }
+
+    const data = await res.json();
+    sessionStorage.setItem("accessToken", data.accessToken);
+    
+    alert("로그인 성공");
 };
