@@ -1,3 +1,4 @@
+import api from "../api/axios";
 import { validateSignup } from "./validateSignup";
 
 export const handleSignup = async (e, userSignupData) => {
@@ -6,18 +7,16 @@ export const handleSignup = async (e, userSignupData) => {
   const valid = validateSignup(e, userSignupData);
   if (!valid) return;
 
-  const res = await fetch("http://localhost:8080/auth/signup", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+  try{
+    const res = await api.post("/auth/signup", {
       username: userSignupData.userName,
       userID: userSignupData.userID,
       userPW: userSignupData.userPW,
       email: userSignupData.userEmail,
       phone: userSignupData.userTell,
-    }),
-  });
-
-  const text = await res.text();
-  alert(text);
+    });
+    alert(res.data);
+  }catch(err){
+    alert("회원가입 실패");
+  }
 };

@@ -1,23 +1,19 @@
+import api from "../api/axios";
+
 export const handleSignin = async (e, userSignindata) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:8080/auth/signin",{
-        method: "POST",
-        headers: { "Content-Type": "application/json"},
-        credentials : "include", // Refresh Token 쿠키용
-        body: JSON.stringify({
-            userID: userSignindata.userInputID,
-            userPW: userSignindata.userInputPW,
-            autoLogin : userSignindata.autoLogin,
-        }),
+    try{
+        const res = await api.post("/auth/signin",{
+        userID: userSignindata.userInputID,
+        userPW: userSignindata.userInputPW,
+        autoLogin : userSignindata.autoLogin,
     });
 
-    if(!res.ok){
-        return alert("로그인 실패");
-    }
+        sessionStorage.setItem("accessToken", res.data.accessToken);
 
-    const data = await res.json();
-    sessionStorage.setItem("accessToken", data.accessToken);
-    
-    alert("로그인 성공");
+        alert("로그인 성공");
+    }catch{
+        alert("로그인 실패");
+    }
 };
