@@ -13,7 +13,7 @@ function Signup() {
   const [userName, setUserName] = useState("");
   const [userPW, setUserPW] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [userTell, setUserTell] = useState("");
+  const [phone, setphone] = useState("");
   const [userPWChk, setUserPWChk] = useState("");
   const [agree, setAgree] = useState(false);
   const [emailValue, setEmailValue] = useState("");
@@ -45,7 +45,7 @@ function Signup() {
     userName,
     userPW,
     userEmail,
-    userTell,
+    phone,
     userPWChk,
     agree,
   };
@@ -210,7 +210,7 @@ function Signup() {
                   className="signup-input"
                   type="tel"
                   placeholder="전화번호를 입력하세요."
-                  onChange={(e) => setUserTell(e.target.value)}
+                  onChange={(e) => setphone(e.target.value)}
                   onBlur={(e) =>
                     (e.target.placeholder = "전화번호를 입력하세요.")
                   }

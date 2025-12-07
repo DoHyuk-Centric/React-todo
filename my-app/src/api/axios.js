@@ -36,8 +36,11 @@ api.interceptors.response.use(
 
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return api(originalRequest); // 원래 요청 재시도
-      } catch (err) {
-        console.log("RefreshToken expired");
+      } catch (refreshError) {
+        console.log("Refresh토큰 만료");
+        sessionStorage.removeItem("accessToken");
+
+        window.location.href = "/signin";
       }
     }
 

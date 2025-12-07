@@ -12,7 +12,7 @@ export const handleSignin = async (e, userSignindata) => {
 
         sessionStorage.setItem("accessToken", res.data.accessToken);
 
-        alert("로그인 성공");
+        window.location.href = "/";
     }catch{
         alert("로그인 실패");
     }

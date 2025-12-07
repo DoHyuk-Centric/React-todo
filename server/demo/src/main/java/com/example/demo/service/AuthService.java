@@ -2,12 +2,17 @@ package com.example.demo.service;
 
 import com.example.demo.dto.SigninRequest;
 import com.example.demo.dto.SignupRequest;
+import com.example.demo.entity.RefreshToken;
+import com.example.demo.repository.RefreshTokenRepository;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.jwt.JwtProvider;
 import com.example.demo.security.jwt.TokenResponse;
 
 import lombok.RequiredArgsConstructor;
+
+import java.time.LocalDateTime;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +23,18 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     public void signup(SignupRequest request) {
 
         // 이미 이메일 존재하는지 체크
-        if(userRepository.existsByEmail(request.getEmail())) {
+        if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("이미 존재하는 이메일입니다.");
         }
-        
-        if(userRepository.existsByUserID(request.getUserID())){
+
+        if (userRepository.existsByUserID(request.getUserID())) {
             throw new RuntimeException("이미 존재하는 아이디입니다.");
-        } 
+        }
 
         // 비번 암호화
         String encodedPassword = passwordEncoder.encode(request.getUserPW());
@@ -45,34 +51,48 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public TokenResponse signin(SigninRequest request){
+    public TokenResponse signin(SigninRequest request) {
         User user = userRepository.findByUserID(request.getUserID())
-        .orElseThrow(() -> new RuntimeException("아이디를 확인해주세요."));
-        //orElseThrow 참고 : https://velog.io/@wonizizi99/Optional%EC%9D%98-orElseorElseThrow-%EC%82%AC%EC%9A%A9%EB%B2%95
+                .orElseThrow(() -> new RuntimeException("아이디를 확인해주세요."));
+        // orElseThrow 참고 :
+        // https://velog.io/@wonizizi99/Optional%EC%9D%98-orElseorElseThrow-%EC%82%AC%EC%9A%A9%EB%B2%95
 
-        if(!passwordEncoder.matches(request.getUserPW(), user.getPassword())) {
+        if (!passwordEncoder.matches(request.getUserPW(), user.getPassword())) {
             throw new RuntimeException("비밀번호가 올바르지 않습니다.");
         }
 
         String accessToken = jwtProvider.generateAccessToken(user.getUserID());
 
         String refreshToken = null;
-        if(request.isAutoLogin()){
+        if (request.isAutoLogin()) {
             refreshToken = jwtProvider.generateRefreshToken(user.getUserID());
-            //System.out.println("RefreshToken : " + refreshToken);
+            // System.out.println("RefreshToken : " + refreshToken);
+            refreshTokenRepository.save(
+                new RefreshToken(user.getUserID(),refreshToken, LocalDateTime.now().plusDays(7))
+            );
         }
 
-
-        //System.out.println("AccessToken : " + accessToken);
-
+        // System.out.println("AccessToken : " + accessToken);
 
         return new TokenResponse(accessToken, refreshToken);
     }
 
-    public TokenResponse refreshToken(String refreshToken){
+    public TokenResponse refreshToken(String refreshToken) {
         String userID = jwtProvider.getUserIDFromToken(refreshToken);
 
         String newAccessToken = jwtProvider.generateAccessToken(userID);
         return new TokenResponse(newAccessToken, refreshToken);
     }
+
+    public String reissueAccessToken(String refreshToken) {
+    // 1. RefreshToken 유효성 검증
+    if (!jwtProvider.validateToken(refreshToken)) {
+        return null; // 만료 or 위조
+    }
+    // 2. RefreshToken에서 userID 꺼내기
+    String userId = jwtProvider.getUserIDFromToken(refreshToken);
+    // 3. 새로운 AccessToken 발급
+    return jwtProvider.generateAccessToken(userId);
+}
+
 }

@@ -2,13 +2,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./component/signup.jsx";
 import Signin from "./component/signin.jsx";
 import MainPage from "./component/MainPage.jsx";
+import LoginGuard from "./component/RouteGuard/LoginGuard.jsx"
 
 const Router = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/Signup" element={<Signup />} />
-      <Route path="/SignIn" element={<Signin />} />
       <Route path="/" element={<MainPage />} />
+      <Route path="/Signup" element={<LoginGuard><Signup /></LoginGuard>} />
+      <Route path="/SignIn" element={<LoginGuard><Signin /></LoginGuard>} />
     </Routes>
   </BrowserRouter>
 );

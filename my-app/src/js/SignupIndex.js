@@ -13,9 +13,9 @@ export const handleSignup = async (e, userSignupData) => {
       userID: userSignupData.userID,
       userPW: userSignupData.userPW,
       email: userSignupData.userEmail,
-      phone: userSignupData.userTell,
+      phone: userSignupData.phone,
     });
-    alert(res.data);
+    window.location.href = "/signin";
   }catch(err){
     alert("회원가입 실패");
   }

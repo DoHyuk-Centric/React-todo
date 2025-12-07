@@ -44,6 +44,18 @@ public class JwtProvider {
                 .getBody()
                 .getSubject();
     }
+    
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     public Key getKey(){
         return key;
