@@ -39,6 +39,7 @@ api.interceptors.response.use(
       } catch (refreshError) {
         console.log("Refresh토큰 만료");
         sessionStorage.removeItem("accessToken");
+        console.log("accessToken 삭제");
 
         window.location.href = "/signin";
       }

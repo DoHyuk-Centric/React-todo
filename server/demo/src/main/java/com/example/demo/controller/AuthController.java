@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -41,6 +42,12 @@ public class AuthController {
             response.addCookie(cookie);
         }
         return ResponseEntity.ok(new TokenResponse(tokens.getAccessToken(), null));
+    }
+
+    @GetMapping("/check")
+    public String check(HttpServletRequest request) {
+        String userID = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userID;
     }
 
     @PostMapping("/refresh")

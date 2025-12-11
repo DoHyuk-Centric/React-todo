@@ -68,8 +68,7 @@ public class AuthService {
             refreshToken = jwtProvider.generateRefreshToken(user.getUserID());
             // System.out.println("RefreshToken : " + refreshToken);
             refreshTokenRepository.save(
-                new RefreshToken(user.getUserID(),refreshToken, LocalDateTime.now().plusDays(7))
-            );
+                    new RefreshToken(user.getUserID(), refreshToken, LocalDateTime.now().plusDays(7)));
         }
 
         // System.out.println("AccessToken : " + accessToken);
@@ -85,14 +84,17 @@ public class AuthService {
     }
 
     public String reissueAccessToken(String refreshToken) {
-    // 1. RefreshToken 유효성 검증
-    if (!jwtProvider.validateToken(refreshToken)) {
-        return null; // 만료 or 위조
+
+        System.out.println("재발급 시도");
+        // 1. RefreshToken 유효성 검증
+        if (!jwtProvider.validateToken(refreshToken)) {
+            return null; // 만료 or 위조
+        }
+        // 2. RefreshToken에서 userID 꺼내기
+        String userId = jwtProvider.getUserIDFromToken(refreshToken);
+        System.out.println("새로 발급된 AccessToken :" + jwtProvider.generateAccessToken(userId));
+        // 3. 새로운 AccessToken 발급
+        return jwtProvider.generateAccessToken(userId);
     }
-    // 2. RefreshToken에서 userID 꺼내기
-    String userId = jwtProvider.getUserIDFromToken(refreshToken);
-    // 3. 새로운 AccessToken 발급
-    return jwtProvider.generateAccessToken(userId);
-}
 
 }
